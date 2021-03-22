@@ -1,0 +1,10 @@
+##ignore this file##
+
+Library
+Temp
+/obj
+Logs
+.vs
+*.csproj
+*.sln
+
