@@ -61,11 +61,43 @@ public class SimpleIKSolverEditor : Editor
         var s = target as SimpleIKSolver;
         if (s.pivot == null || s.upper == null || s.lower == null | s.effector == null || s.tip == null)
             EditorGUILayout.HelpBox("Please assign Pivot, Upper, Lower, Effector and Tip transforms.", MessageType.Error);
+        //default functionality is good enough for this component
         base.OnInspectorGUI();
     }
 
+    bool draw = true;
     public void OnSceneGUI()
     {
+        Handles.BeginGUI();
+
+        Rect rect = new Rect(10, 10, 100, 50);
+        
+        if (draw)
+        {
+            if(GUI.Button(rect, "Hide"))
+            {
+                draw = false;
+            }
+        }
+        else
+        {
+            if(GUI.Button(rect, "Draw"))
+            {
+                draw = true;
+            }       
+        }
+        if(!draw)
+        {
+            return;
+        }
+
+        //if (Event.current.type == EventType.MouseDown)
+        //{
+        //    Debug.Log("press");
+        //}
+
+        Handles.EndGUI();
+
         var siks = target as SimpleIKSolver;
         RotationHandle(siks.effector);
         RotationHandle(siks.lower);
@@ -89,5 +121,4 @@ public class SimpleIKSolverEditor : Editor
             }
         }
     }
-
 }
